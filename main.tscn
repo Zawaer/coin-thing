@@ -20,10 +20,9 @@ environment = SubResource("Environment_7dm0k")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010935307, 0, 0)
-visible = false
-custom_aabb = AABB(-5, 0, -5, 10, 0.1, 10)
+custom_aabb = AABB(0, 0, 0, 10, 0.1, 10)
 mesh = SubResource("PlaneMesh_7dm0k")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
-transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0.05, 0)
+transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 5, 0.05, 5)
 shape = SubResource("BoxShape3D_7dm0k")
