@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dl8uit8tl7ysn"]
+[gd_scene load_steps=5 format=3 uid="uid://dl8uit8tl7ysn"]
+
+[ext_resource type="PackedScene" uid="uid://bc248dop0l2sc" path="res://coin.tscn" id="1_ig7tw"]
 
 [sub_resource type="Environment" id="Environment_7dm0k"]
 background_mode = 1
@@ -10,7 +12,7 @@ background_mode = 1
 [node name="Main" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.135355, 3.3619914)
 current = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -28,6 +30,9 @@ transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 5, 0.05, 5)
 shape = SubResource("BoxShape3D_7dm0k")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4416223, 0)
 light_color = Color(0.9999997, 0.90996134, 0.80835176, 1)
 light_energy = 10.0
+
+[node name="Coin" parent="." instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1205235, 0)
