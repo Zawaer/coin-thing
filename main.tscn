@@ -1,6 +1,22 @@
-[gd_scene format=3 uid="uid://dl8uit8tl7ysn"]
+[gd_scene load_steps=3 format=3 uid="uid://dl8uit8tl7ysn"]
+
+[sub_resource type="Environment" id="Environment_7dm0k"]
+background_mode = 1
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7dm0k"]
 
 [node name="Main" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 1, -5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 6)
+current = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7dm0k")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010935307, 0, 0)
+custom_aabb = AABB(-5, 0, -5, 10, 0.1, 10)
+mesh = SubResource("PlaneMesh_7dm0k")
