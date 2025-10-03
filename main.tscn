@@ -26,3 +26,8 @@ mesh = SubResource("PlaneMesh_7dm0k")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 5, 0.05, 5)
 shape = SubResource("BoxShape3D_7dm0k")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+light_color = Color(0.9999997, 0.90996134, 0.80835176, 1)
+light_energy = 10.0
