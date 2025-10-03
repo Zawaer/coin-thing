@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dl8uit8tl7ysn"]
+[gd_scene load_steps=4 format=3 uid="uid://dl8uit8tl7ysn"]
 
 [sub_resource type="Environment" id="Environment_7dm0k"]
 background_mode = 1
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_7dm0k"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
 
 [node name="Main" type="Node3D"]
 
@@ -18,5 +20,10 @@ environment = SubResource("Environment_7dm0k")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.010935307, 0, 0)
+visible = false
 custom_aabb = AABB(-5, 0, -5, 10, 0.1, 10)
 mesh = SubResource("PlaneMesh_7dm0k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0.05, 0)
+shape = SubResource("BoxShape3D_7dm0k")
