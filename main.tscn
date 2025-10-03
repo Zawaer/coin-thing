@@ -16,7 +16,7 @@ albedo_color = Color(0, 0, 0, 1)
 [node name="Main" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.135355, 3.134963)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6482049, 2.414168)
 current = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -40,4 +40,4 @@ light_energy = 16.0
 omni_range = 6.0
 
 [node name="Coin" parent="." instance=ExtResource("1_ig7tw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.754348, 0)
+transform = Transform3D(-0.81902134, 0.15145984, -0.55341107, 0.39710188, -0.546564, -0.73727727, -0.41414246, -0.82360655, 0.3875026, 0, 27.61137, 0)
