@@ -34,10 +34,11 @@ transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0.05, 0)
 shape = SubResource("BoxShape3D_7dm0k")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.58529, 3.850401, -4.286948)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.232528, 1.7964256, -0.4618082)
 light_color = Color(0.9999997, 0.90996134, 0.80835176, 1)
 light_energy = 5.936
 omni_range = 18.591
 
 [node name="Coin" parent="." instance=ExtResource("1_ig7tw")]
-transform = Transform3D(0.098741874, -0.77322555, 0.6263963, 0.39710185, -0.546564, -0.73727727, 0.9124473, 0.32154334, 0.25308055, 0, 5.202408, 0)
+transform = Transform3D(-0.42181775, 0.81975603, -0.38738832, 0.8551347, 0.5017046, 0.13052619, 0.30135414, -0.27621096, -0.9126298, 0, 5.202408, 0)
+mass = 1.0

@@ -15,6 +15,7 @@ height = 0.1
 radius = 1.0
 
 [node name="Coin" type="RigidBody3D"]
+mass = 257.191
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_6qpsl")
