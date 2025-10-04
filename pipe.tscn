@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://crfr8kh16wsq5"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_sj7mh"]
+
+[node name="Pipe" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1, 0)
+mesh = SubResource("CylinderMesh_sj7mh")
