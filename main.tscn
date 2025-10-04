@@ -17,9 +17,10 @@ albedo_color = Color(0, 0, 0, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_h2yge")
+coin_scene = ExtResource("1_ig7tw")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1813198, 3.8107533)
+transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 3.0726976, 6.3759937)
 current = true
 
 [node name="Pipe" parent="." instance=ExtResource("2_0xm2m")]
@@ -27,16 +28,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.186457)
 
 [node name="Coin" parent="." instance=ExtResource("1_ig7tw")]
 transform = Transform3D(-0.42181775, 0.81975603, -0.38738832, 0.8551347, 0.5017046, 0.13052619, 0.30135414, -0.27621096, -0.9126298, 0, 5.202408, 0)
-mass = 1.0
+mass = 2.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_7dm0k")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.232528, 1.7964256, -0.4618082)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0713305, 3.7213295, -0.4618082)
 light_color = Color(0.9999997, 0.90996134, 0.80835176, 1)
-light_energy = 5.936
-omni_range = 18.591
+light_energy = 13.854
+omni_range = 112.554
 
 [node name="Floor" type="StaticBody3D" parent="."]
 
