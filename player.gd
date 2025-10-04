@@ -25,7 +25,7 @@ func _physics_process(delta):
 	velocity.z = input_dir.z * speed
 	
 	# Gravity
-	velocity.y += ProjectSettings.get_setting("physics/3d/default_gravity") * delta
+	#velocity.y += ProjectSettings.get_setting("physics/3d/default_gravity") * delta
 	
 	move_and_slide()
 
