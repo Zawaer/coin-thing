@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://dl8uit8tl7ysn"]
+[gd_scene load_steps=14 format=3 uid="uid://dl8uit8tl7ysn"]
 
 [ext_resource type="Script" uid="uid://ejayi0xckqfg" path="res://player.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://bc248dop0l2sc" path="res://coin.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://crfr8kh16wsq5" path="res://pipe.tscn" id="2_h2yge"]
 [ext_resource type="Texture2D" uid="uid://ckhaitpf72diw" path="res://assets/crosshair.png" id="4_lquwl"]
 [ext_resource type="PackedScene" uid="uid://1vac11dkd0dp" path="res://target.tscn" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://y8o1fc5v0rf0" path="res://interface.gd" id="6_7mycd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -85,3 +86,12 @@ texture = ExtResource("4_lquwl")
 
 [node name="Target" parent="." instance=ExtResource("5_lquwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.198355, -73.307144)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_7mycd")
