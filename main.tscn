@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dl8uit8tl7ysn"]
+[gd_scene load_steps=10 format=3 uid="uid://dl8uit8tl7ysn"]
 
 [ext_resource type="Script" uid="uid://ejayi0xckqfg" path="res://player.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://bc248dop0l2sc" path="res://coin.tscn" id="2_0xm2m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -57,3 +58,6 @@ shape = SubResource("ConvexPolygonShape3D_h2yge")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.63033867, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Neck"]
+
+[node name="Coin" parent="." instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.74840355, 3.750475, -4.5775423)
