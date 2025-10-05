@@ -9,9 +9,23 @@ const JUMP_VELOCITY = 6
 @export var shoot_force: float = 50.0
 @export var spin_strength: float = 6.0
 
+# Rapid fire settings
+@export var rapid_fire_rate: float = 0.12  # seconds between shots
+@onready var GameState = get_node("/root/GameState")
+var _rapid_fire_timer: Timer
+
+
 @onready var neck := $Neck
 @onready var camera := $Neck/Camera3D
 @onready var pipe := $Neck/Camera3D/Pipe   # Make sure this Node3D exists
+
+func _ready():
+	# create a Timer for rapid fire so we don't rely on editor nodes
+	_rapid_fire_timer = Timer.new()
+	_rapid_fire_timer.wait_time = rapid_fire_rate
+	_rapid_fire_timer.one_shot = false
+	add_child(_rapid_fire_timer)
+	_rapid_fire_timer.timeout.connect(_on_rapid_fire_timeout)
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
@@ -30,6 +44,23 @@ func _unhandled_input(event):
 	# Left click to shoot
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		shoot_coin()
+
+	# Right click to start/stop rapid fire (only if unlocked)
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.pressed:
+			if GameState.rapid_fire_unlocked:
+				# start immediate shot and then the repeating timer
+				shoot_coin()
+				_rapid_fire_timer.start()
+		else:
+			_rapid_fire_timer.stop()
+
+func _on_rapid_fire_timeout():
+	# Only fire while unlocked
+	if GameState.rapid_fire_unlocked:
+		shoot_coin()
+	else:
+		_rapid_fire_timer.stop()
 
 func _physics_process(delta: float) -> void:
 	# Gravity

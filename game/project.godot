@@ -17,6 +17,10 @@ boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 config/icon="uid://cd77v2cdr6g20"
 
+[autoload]
+
+GameState="*res://game_state.gd"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")

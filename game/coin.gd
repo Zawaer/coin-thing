@@ -5,6 +5,9 @@ extends RigidBody3D
 var _spawn_y: float
 var _spawned: bool = false
 
+func _ready():
+	add_to_group("coins")
+
 func _physics_process(_delta: float) -> void:
 	# capture spawn height on the first physics frame (deferred positioning will be applied by then)
 	if not _spawned:
