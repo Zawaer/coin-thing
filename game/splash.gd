@@ -1,11 +1,11 @@
 extends Control
 
 @export var load_scene : PackedScene
-@export var in_time : float = 0.5
-@export var fade_in_time : float = 1.5
-@export var pause_time : float = 1.5
-@export var fade_out_time : float = 1.5
-@export var out_time : float = 0.5
+@export var in_time : float = 0.2
+@export var fade_in_time : float = 0.8
+@export var pause_time : float = 0.5
+@export var fade_out_time : float = 0.8
+@export var out_time : float = 0.2
 @export var splash_screen : TextureRect
 
 func fade() -> void:

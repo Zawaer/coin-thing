@@ -16,7 +16,7 @@ height = 0.5
 height = 0.5
 radius = 2.0
 
-[node name="RigidBody3D" type="RigidBody3D"]
+[node name="Target" type="RigidBody3D"]
 mass = 50.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

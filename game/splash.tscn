@@ -11,9 +11,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_b04ml")
 load_scene = ExtResource("2_50j67")
-fade_in_time = 1.0
-pause_time = 0.5
-fade_out_time = 1.0
 splash_screen = NodePath("CenterContainer/TextureRect")
 
 [node name="ColorRect" type="ColorRect" parent="."]
