@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://1vac11dkd0dp"]
+
+[ext_resource type="Texture2D" uid="uid://bw20xp007lgf" path="res://assets/target.png" id="1_t2jmu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t2jmu"]
+albedo_texture = ExtResource("1_t2jmu")
+uv1_scale = Vector3(2, 2, 2)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3hr3o"]
+material = SubResource("StandardMaterial3D_t2jmu")
+top_radius = 2.0
+bottom_radius = 2.0
+height = 0.5
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_t2jmu"]
+height = 0.5
+radius = 2.0
+
+[node name="RigidBody3D" type="RigidBody3D"]
+mass = 50.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_3hr3o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_t2jmu")

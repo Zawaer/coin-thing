@@ -1,10 +1,12 @@
+# TODO: add targets
+
 extends CharacterBody3D
 
 const NORMAL_SPEED = 8.0
 const SPRINT_SPEED = 14.0
 const JUMP_VELOCITY = 6
 @export var coin_scene: PackedScene   # Assign Coin.tscn in the inspector
-@export var shoot_force: float = 100.0
+@export var shoot_force: float = 50.0
 @export var spin_strength: float = 6.0
 
 @onready var neck := $Neck
