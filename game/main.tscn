@@ -73,13 +73,20 @@ fov = 80.0
 [node name="Pipe" parent="CharacterBody3D/Neck/Camera3D" instance=ExtResource("2_h2yge")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.07335448, -1.4346948, -1.3308245)
 
-[node name="TextureRect" type="TextureRect" parent="CharacterBody3D/Neck/Camera3D"]
-offset_left = 566.0
-offset_top = 314.0
-offset_right = 586.0
-offset_bottom = 334.0
-texture = ExtResource("4_lquwl")
-
 [node name="Target" parent="." instance=ExtResource("5_lquwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.3670979, -17.741737)
 script = SubResource("GDScript_lquwl")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CenterContainer"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_lquwl")
