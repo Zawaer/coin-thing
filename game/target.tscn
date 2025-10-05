@@ -4,29 +4,52 @@
 
 [sub_resource type="GDScript" id="GDScript_t2jmu"]
 script/source = "# ...existing code...
-extends RigidBody3D
+extends Node3D
 
-@onready var hit_area := $HitArea
 @onready var GameState = get_node(\"/root/GameState\")
-
-# Optional: tiny bob animation
-@export var bob_amount := 0.25
-@export var bob_speed := 1.2
-var _bob_phase := 0.0
+var hit_area: Area3D
 
 func _ready():
-	hit_area.body_entered.connect(_on_body_entered)
+	# try direct child first, then search descendants
+	hit_area = get_node_or_null(\"HitArea\")
+	if not hit_area:
+		hit_area = _find_node_recursive(self, \"HitArea\")
+	if hit_area:
+		# connect safely; use string-based connect for compatibility
+		if hit_area.has_signal(\"body_entered\"):
+			hit_area.connect(\"body_entered\", Callable(self, \"_on_body_entered\"))
+		else:
+			print(\"Target: HitArea found but does not have 'body_entered' signal; check node type.\")
+	else:
+		print(\"Target: HitArea node not found. Add an Area3D child named 'HitArea' under the Target node.\")
+		# optional: create a small fallback Area3D so the game continues
+		var fb = Area3D.new()
+		fb.name = \"__HitAreaFallback\"
+		var cs = CollisionShape3D.new()
+		cs.shape = SphereShape3D.new()
+		cs.shape.radius = 0.5
+		fb.add_child(cs)
+		add_child(fb)
+		hit_area = fb
+		hit_area.connect(\"body_entered\", Callable(self, \"_on_body_entered\"))
 
-func _process(delta):
-	_bob_phase += delta * bob_speed
-	global_transform.origin.y += sin(_bob_phase) * bob_amount * delta
+# Recursive search helper (works in Godot 4)
+func _find_node_recursive(root: Node, target_name: String) -> Node:
+	for child in root.get_children():
+		if child is Node:
+			if child.name == target_name:
+				return child
+			var found = _find_node_recursive(child, target_name)
+			if found:
+				return found
+	return null
 
 func _on_body_entered(body):
-	# check group to avoid false positives
+	# ...existing on-body logic...
 	if body.is_in_group(\"coins\"):
 		GameState.unlock_rapid_fire()
-		# Optional: play effect/sound then free
 		queue_free()
+# ...existing code...
 "
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t2jmu"]
@@ -43,16 +66,15 @@ height = 0.5
 height = 0.5
 radius = 2.0
 
-[node name="Target" type="RigidBody3D"]
-mass = 50.0
+[node name="Target" type="StaticBody3D"]
 script = SubResource("GDScript_t2jmu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
 mesh = SubResource("CylinderMesh_3hr3o")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="HitArea" type="Area3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
 shape = SubResource("CylinderShape3D_t2jmu")

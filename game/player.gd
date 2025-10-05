@@ -10,7 +10,7 @@ const JUMP_VELOCITY = 6
 @export var spin_strength: float = 6.0
 
 # Rapid fire settings
-@export var rapid_fire_rate: float = 0.12  # seconds between shots
+@export var rapid_fire_rate: float = 0.04  # seconds between shots
 @onready var GameState = get_node("/root/GameState")
 var _rapid_fire_timer: Timer
 
@@ -102,28 +102,39 @@ func shoot_coin():
 		return
 
 	var coin = coin_scene.instantiate()
-	# Add to the scene first, then set transform/velocity deferred so the physics server sees a clean spawn
+
+	# Spawn a bit in front of the pipe so it doesn't overlap the player.
+	var spawn_distance := 1.0  # tweak as needed (units)
+	var forward: Vector3 = -pipe.global_transform.basis.z.normalized()
+	var spawn_transform: Transform3D = pipe.global_transform
+	spawn_transform.origin += forward * spawn_distance
+	coin.global_transform = spawn_transform
+
+	# Add to scene root (or current_scene) after transform is set
 	get_tree().current_scene.add_child(coin)
 
-	# Compute forward direction from the pipe
-	var direction = -pipe.global_transform.basis.z.normalized()
+	# Give the coin initial linear velocity away from the player
+	if coin.has_method("set_linear_velocity"):
+		coin.set_linear_velocity(forward * shoot_force)
+	elif "linear_velocity" in coin:
+		coin.linear_velocity = forward * shoot_force
 
-	# Spawn a bit further out and slightly above the pipe to avoid initial overlaps with geometry or the player
-	var spawn_pos = pipe.global_position + (direction * 1.0) + Vector3(0, 0.45, 0)
+	# Optional: set spin/ang velocity if your coin supports it
+	if "angular_velocity" in coin:
+		coin.angular_velocity = Vector3(randf(), randf(), randf()) * spin_strength
 
-	# Use deferred sets so the engine applies them safely in the next idle/physics step.
-	# This avoids lost impulses or spawning already intersecting other colliders which can cause noclip/tunneling.
-	coin.set_deferred("global_position", spawn_pos)
-	coin.set_deferred("linear_velocity", direction * shoot_force)
-	coin.set_deferred("sleeping", false)
+	# Prevent immediate collision with the player: temporarily clear collision mask
+	# NOTE: change PLAYER_LAYER_BIT if your player uses a different layer (0-based bit index)
+	var PLAYER_LAYER_BIT := 0  # usually layer 1 => bit 0
+	if "collision_mask" in coin and "collision_mask" in self:
+		var orig_mask: int = coin.collision_mask
+		coin.collision_mask = coin.collision_mask & ~(1 << PLAYER_LAYER_BIT)
+		# restore after short delay so coin collides with world/targets normally
+		# use a short timer so the coin can't push the player before moving away
+		call_deferred("_restore_coin_mask", coin, orig_mask, 0.08)
 
-	# Give the coin a random angular velocity so it spins when shot
-	var rng = RandomNumberGenerator.new()
-	rng.randomize()
-	var rand_dir = Vector3(rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0))
-	if rand_dir.length() < 0.001:
-		rand_dir = Vector3(0, 1, 0)
-	else:
-		rand_dir = rand_dir.normalized()
-	var spin_speed = rng.randf_range(0.4, 1.0) * spin_strength
-	coin.set_deferred("angular_velocity", rand_dir * spin_speed)
+# helper deferred restore (keeps shoot_coin tidy)
+func _restore_coin_mask(coin, orig_mask, delay):
+	await get_tree().create_timer(delay).timeout
+	if is_instance_valid(coin):
+		coin.collision_mask = orig_mask

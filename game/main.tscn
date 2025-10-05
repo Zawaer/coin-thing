@@ -84,4 +84,4 @@ mouse_filter = 2
 texture = ExtResource("4_lquwl")
 
 [node name="Target" parent="." instance=ExtResource("5_lquwl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5038452, -24.28798)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20.198355, -73.307144)
