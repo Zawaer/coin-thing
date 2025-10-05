@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 const NORMAL_SPEED = 8.0
 const SPRINT_SPEED = 14.0
-const JUMP_VELOCITY = 4.5
+const JUMP_VELOCITY = 6
 @export var coin_scene: PackedScene   # Assign Coin.tscn in the inspector
 @export var shoot_force: float = 10.0
 @export var spin_strength: float = 6.0
@@ -34,8 +34,8 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Jump
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	# Jump: allow holding the jump key so the player will jump again on landing while the key is held
+	if Input.is_action_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
 	# Movement (WASD)
